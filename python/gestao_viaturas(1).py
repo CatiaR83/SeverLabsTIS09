@@ -77,14 +77,14 @@ class CatalogoViaturas:
         if self._viats[matricula]:
             del self._viats[matricula]
         else:
-            raise DoesNotExistViatur(f'Não existe uma viatura com a matricula {viat.matricula} no catálogo')
+            raise DoesNotExistViatur(f'Não existe uma viatura com a matricula {viat.matricula} no catálogo!')
     #:
 
     def _dump(self):
         for viat in self._viats.values():
             print(viat)
         #:
-    #:
+    
 
 class InvalidViaturaType(ValueError):
     pass
