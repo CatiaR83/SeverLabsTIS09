@@ -25,7 +25,8 @@ DEFAULT_INDENTATION = 3
 
 VIATURAS_TYPES = {
     'OC': 'Opel',
-    'MC': 'Mercedes'
+    'MC': 'Mercedes',
+    'CH': 'Cheverolet'
 }
 
 class Viatura:
@@ -106,7 +107,7 @@ def main() -> None:
     viaturas.append(Viatura('78-TY-88', 'Mercedes', '300SL', datetime.datetime(2019, 5, 23)))#datetime.datetime(2020, 8, 17)))
     continuaExecutar=True
 
-    while(continuaExecutar):
+    while continuaExecutar:
         print('#            Menu')
         print('#       1 - Listar Viaturas')
         print('#       2 - Pesquisar Viaturas')
