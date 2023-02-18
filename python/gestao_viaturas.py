@@ -1,4 +1,4 @@
-# # matricula (str), marca, modelo, data
+ # matricula (str), marca, modelo, data
 # 10-XY-20,Opel,Corsa XL,2019-10-15
 # 20-PQ-15,Mercedes,300SL,2017-05-31
 
@@ -15,6 +15,7 @@
 
 from decimal import Decimal as dec
 from pickle import NONE
+import csv
 import subprocess
 import sys
 import datetime
@@ -26,7 +27,7 @@ DEFAULT_INDENTATION = 3
 VIATURAS_TYPES = {
     'OC': 'Opel',
     'MC': 'Mercedes',
-    'CH': 'Cheverolet'
+    'FD': 'Ford'
 }
 
 class Viatura:
@@ -52,9 +53,12 @@ class Viatura:
     def desc_marca(self) -> str:
         return VIATURAS_TYPES[self.marca]
     
+    def desc_for_file(self) -> str:
+        return f'{self.matricula},{self.desc_marca},{self.modelo},{self.data.strftime("%Y-%m-%d")}'
+    
     def __str__(self) -> str:
         cls_name = self.__class__.__name__
-        return f'{cls_name}[matricula = {self.matricula}, marca = "{self.desc_marca}", modelo = "{self.modelo}, data ="{self.data.strftime("%Y-%m-%d")}"]'
+        return f'{cls_name}[matricula = {self.matricula}, marca = "{self.desc_marca}", modelo = "{self.modelo}", data ="{self.data.strftime("%Y-%m-%d")}"]'
     #:
 
 class CatalogoViaturas:
@@ -78,14 +82,14 @@ class CatalogoViaturas:
         if self._viats[matricula]:
             del self._viats[matricula]
         else:
-            raise DoesNotExistViatur(f'Não existe uma viatura com a matricula {viat.matricula} no catálogo!')
+            raise DoesNotExistViatur(f'Não existe uma viatura com a matricula {viat.matricula} no catálogo')
     #:
 
     def _dump(self):
         for viat in self._viats.values():
             print(viat)
         #:
-    
+    #:
 
 class InvalidViaturaType(ValueError):
     pass
@@ -117,7 +121,7 @@ def main() -> None:
         print('#       6 - Recarregar Catálogo')
         print('#       T - Terminar')
         print('# ')
-        opcao = str(input('#       Selecione uma  Opção >> '))
+        opcao = str(input('#       Opção >> '))
         match opcao:
             case '1':
                 viaturas._dump()
@@ -145,9 +149,22 @@ def main() -> None:
                 matricula = str(input())
                 viaturas.remove(matricula)
 
-#            case 5:
- 
-#            case 6:
+            case '5':
+                with open('viaturas.csv', 'w') as csvfile:
+                    fields = ['matricula', 'marca', 'modelo', 'data']
+                    writer = csv.DictWriter(csvfile, fieldnames=fields)
+                    writer.writeheader()
+                    for viatura in viaturas._viats:
+                        writer.writerow({'matricula': f'{viatura.matricula}', 'marca': f'{viatura.marca}', 'modelo' : f'{viatura.modelo}', 'data': f'{viatura.data.strftime("%Y-%m-%d")}'})
+
+            case '6':
+                viaturas = CatalogoViaturas()
+                with open('viaturas.csv', 'r') as csvfile:
+                    reader = csv.DictReader(csvfile)
+                    for row in reader:
+                        year, month, day = map(int, row['data'].split('-'))
+                        datafinal = datetime.date(year, month, day)
+                        viaturas.append(Viatura(row['matricula'], row['marca'], row['modelo'],datafinal))
 
             case 'T':
                 continuaExecutar = False
