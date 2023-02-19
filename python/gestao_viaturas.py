@@ -1,4 +1,4 @@
- # matricula (str), marca, modelo, data
+# # matricula (str), marca, modelo, data
 # 10-XY-20,Opel,Corsa XL,2019-10-15
 # 20-PQ-15,Mercedes,300SL,2017-05-31
 
@@ -27,7 +27,8 @@ DEFAULT_INDENTATION = 3
 VIATURAS_TYPES = {
     'OC': 'Opel',
     'MC': 'Mercedes',
-    'FD': 'Ford'
+    'FD': 'Ford',
+    'CH': 'Cheverolet'
 }
 
 class Viatura:
@@ -121,7 +122,7 @@ def main() -> None:
         print('#       6 - Recarregar Catálogo')
         print('#       T - Terminar')
         print('# ')
-        opcao = str(input('#       Opção >> '))
+        opcao = str(input('#      Selecione uma Opção >> '))
         match opcao:
             case '1':
                 viaturas._dump()
@@ -154,7 +155,8 @@ def main() -> None:
                     fields = ['matricula', 'marca', 'modelo', 'data']
                     writer = csv.DictWriter(csvfile, fieldnames=fields)
                     writer.writeheader()
-                    for viatura in viaturas._viats:
+                    for matricula in viaturas._viats:
+                        viatura = viaturas._viats[matricula]
                         writer.writerow({'matricula': f'{viatura.matricula}', 'marca': f'{viatura.marca}', 'modelo' : f'{viatura.modelo}', 'data': f'{viatura.data.strftime("%Y-%m-%d")}'})
 
             case '6':
