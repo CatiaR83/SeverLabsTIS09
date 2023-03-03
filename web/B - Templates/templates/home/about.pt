@@ -1,0 +1,7 @@
+<div metal:use-macro="load: ../shared/layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+        <h1>Sobre a courseca</h1>
+        <h3>Trata-se certamente de uma grande instituição</h3>
+        <h3>Olá, ${nome}</h3>
+    </div>
+</div>
