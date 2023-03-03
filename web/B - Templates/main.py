@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi-chameleon import global_init
+from fastapi_chameleon import global_init
 import uvicorn
 
 from views import (
