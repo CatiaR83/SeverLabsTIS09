@@ -1,0 +1,12 @@
+<div metal:use-macro="load: ../shared/_layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+        <ul>
+            <li>${course1}</li>
+            <li>${course2}</li>
+            <li>${course3}</li>
+        
+        </ul>
+    </div>
+</div>
+
+

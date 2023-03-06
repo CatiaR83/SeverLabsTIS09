@@ -3,12 +3,11 @@ import uvicorn
 
 app = FastAPI()
 
-@app.get('/')
+@app.get("/")
 async def index():
-    return {
-        'msg': 'Hello, World'
-    }
-#
+    return {'mensagem': 'Hello, World'}
+#:
 
-if __name__ == '__main__':
+
+if __name__== '__main__':
     uvicorn.run(app)

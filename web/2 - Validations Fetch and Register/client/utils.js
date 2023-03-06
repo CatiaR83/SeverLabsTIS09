@@ -4,14 +4,12 @@ export {
     bySelAll,
     whenClick,
     whenAllClick,
-
-    createEmptyObj,
+    syncWait,
 
     byPOSTasJSON,
 
     isValidDate,
     timedRun,
-    syncWait,
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,20 +58,6 @@ function whenAllClick(query, handler) {
     for (let elem of document.querySelectorAll(query)) {
         elem.addEventListener('click', handler);
     }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-///
-///     OBJECTS
-///
-////////////////////////////////////////////////////////////////////////////////
-
-function createEmptyObj(objSource) {
-    const obj = Object.create(null);
-    if (objSource) {
-        Object.assign(obj, objSource);
-    }
-    return obj;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

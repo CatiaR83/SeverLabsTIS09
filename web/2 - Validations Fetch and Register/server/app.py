@@ -3,9 +3,8 @@ In this version we use both Pydantic and SQLAlchemy:
 
     1. Pydantic: For defining, parsing and validating data exposed by the
     Web API
-
+    
     2. SQLAlchemy: To define and use the SQL data model.
-
 In the next version we'll use SQLModel to bridge the gap between Pydantic
 and SQLAlchemy.
 
@@ -16,11 +15,13 @@ and Flask apps:
     - models.py: SQLAlchemy models (the data model)
     - database.py: SQLAlchemy connection and session definitions
     - database_crud.py: SQLAlchemy database access operations
-
+    
 Links:
     https://fastapi.tiangolo.com/tutorial/sql-databases/
     https://docs.sqlalchemy.org/en/14/orm/quickstart.html
     https://docs.sqlalchemy.org/en/14/orm/
+    
+    
 """
 
 from fastapi import FastAPI, Depends, HTTPException
@@ -73,10 +74,8 @@ def main():
     help_doc = """
 A Web accessible FastAPI server that allow players to register/enroll
 for tournaments.
-
 Usage:
   app.py [-c | -c -d] [-p PORT] [-h HOST_IP]
-
 Options:
   -p PORT, --port=PORT          Listen on this port [default: 8000]
   -c, --create-ddl              Crea    te datamodel in the database
